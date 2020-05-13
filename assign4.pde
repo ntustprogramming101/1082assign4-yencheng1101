@@ -38,6 +38,8 @@ int playerMoveDuration = 15;
 
 boolean demoMode = false;
 
+float spacing = 80;
+
 void setup() {
 	size(640, 480, P2D);
 	bg = loadImage("img/bg.jpg");
@@ -65,6 +67,8 @@ void setup() {
 	soil4 = loadImage("img/soil4.png");
 	soil5 = loadImage("img/soil5.png");
 
+   stone1=loadImage("img/stone1.png");
+   stone2=loadImage("img/stone2.png");
 	// Load PImage[][] soils
 	soils = new PImage[6][5];
 	for(int i = 0; i < soils.length; i++){
@@ -162,7 +166,61 @@ void draw() {
 				
 			}
 		}
-
+    //stone
+    //layer 1-8
+    for (int i=0;i<8;i++){
+      image(stone1,i*spacing,i*spacing);
+    }
+    //layer 9-16
+    for(int i=0;i<8;i++){
+      if (i%4==1||i%4==2){
+        for(int j=0;j<8;j++){
+          if (j%4==0||j%4==3){
+            image(stone1,j*spacing,(i+8)*spacing);
+          }
+        }
+      }
+      if (i%4==3||i%4==0){
+        for(int j=0;j<8;j++){
+          if (j%4==1||j%4==2){
+            image(stone1,j*spacing,(i+8)*spacing);
+          }
+        }
+      }
+    }
+    //layer 17-24
+    for (int i=0;i<8;i++){
+      if(i%3==0){
+        for(int j=0;j<8;j++){
+          if(j%3!=0){
+            image(stone1,j*spacing,(i+16)*spacing);
+            if(j%3==2){
+              image(stone2,j*spacing,(i+16)*spacing);
+            }
+          }
+        }
+      }
+      if(i%3==1){
+        for(int j=0;j<8;j++){
+          if(j%3!=2){
+            image(stone1,j*spacing,(i+16)*spacing);
+            if(j%3==1){
+              image(stone2,j*spacing,(i+16)*spacing);
+            }
+          }
+        }
+      }
+      if(i%3==2){
+        for(int j=0;j<8;j++){
+          if(j%3!=1){
+            image(stone1,j*spacing,(i+16)*spacing,spacing,spacing);
+            if(j%3==0){
+              image(stone2,j*spacing,(i+16)*spacing,spacing,spacing);
+            }
+          }
+        }
+      }
+    }
 		// Cabbages
 		// > Remember to check if playerHealth is smaller than PLAYER_MAX_HEALTH!
 
